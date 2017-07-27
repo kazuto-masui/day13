@@ -1,5 +1,5 @@
 class PoemsController < ApplicationController
-  before_action :set_poem, only: [:show, :edit, :destroy]
+  before_action :set_poem, only: [:show, :edit, :destroy, :update]
 
   # GET /poems
   # GET /poems.json
@@ -40,16 +40,16 @@ class PoemsController < ApplicationController
   # PATCH/PUT /poems/1
   # PATCH/PUT /poems/1.json
   def update
-    respond_to do |format|
-      if @poem.update(poem_params)
-        format.html { redirect_to @poem, notice: 'Poem was successfully updated.' }
-        format.json { render :show, status: :ok, location: @poem }
-      else
-        format.html { render :edit }
-        format.json { render json: @poem.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+   respond_to do |format|
+     if @poem.update(poem_params)
+       format.html { redirect_to @poem, notice: 'Poem was successfully updated.' }
+       format.json { render :show, status: :ok, location: @poem }
+     else
+       format.html { render :edit }
+       format.json { render json: @poem.errors, status: :unprocessable_entity }
+     end
+   end
+ end
 
   # DELETE /poems/1
   # DELETE /poems/1.json
@@ -69,6 +69,6 @@ class PoemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poem_params
-      params.require(:poem).permit(:content, :auther)
+      params.require(:poem).permit(:title, :content, :auther)
     end
 end
